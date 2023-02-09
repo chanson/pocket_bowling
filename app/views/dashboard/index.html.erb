@@ -1,0 +1,35 @@
+hello current user
+
+<div class="flex justify-between items-center mb-2">
+  <h2 class="text-xl">Events</h2>
+  <%= link_to "New Event", new_event_path, class: "btn btn-primary btn-md" %>
+</div>
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date(s)</th>
+        <th>Participants</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @events.present? %>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.name %> </td>
+            <td><%= event.start_datetime %> - <% event.end_datetime %></td>
+            <td><%= event.event_participants.count %></td>
+            <td><%= link_to 'View', event_path(event) %>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>No events made yet</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

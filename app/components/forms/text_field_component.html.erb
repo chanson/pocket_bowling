@@ -1,0 +1,10 @@
+<div class="<%= @wrapper_class %>">
+  <%= @form.label @placeholder, class: "#{@show_label ? 'label label-text' : 'sr-only'}", for: @id %>
+  <%= @form.text_field @name, id: @id, autofocus: true, type: @type,
+    placeholder: @placeholder, class: "appearance-none input input-bordered w-full #{error_class}" %>
+
+  <% if error_message.present? %>
+    <p class="pl-[1.125rem] pt-1 text-error text-sm"><%= error_message %></p>
+  <% end %>
+</div>
+

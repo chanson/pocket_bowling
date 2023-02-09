@@ -1,0 +1,54 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <img
+        class="mx-auto h-12 w-auto"
+        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        alt="Workflow"
+      />
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-base-content">Sign up</h2>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="mt-8 space-y-6">
+        <input type="hidden" name="remember" value="true" />
+        <div class="rounded-md shadow-sm -space-y-px flex flex-col gap-4">
+          <div class="flex flex-row gap-4">
+            <%= f.label :email, class: "sr-only", for: "first-name" %>
+            <%= f.text_field :first_name, id: "first-name", autofocus: true,
+            autocomplete: "given-name", placeholder: "First name", class: "appearance-none input input-bordered w-1/2" %>
+
+            <%= f.label :email, class: "sr-only", for: "last-name" %>
+            <%= f.text_field :last_name, id: "last-name", autofocus: true,
+            autocomplete: "family-name", placeholder: "Last name", class: "appearance-none input input-bordered w-1/2" %>
+          </div>
+
+          <div>
+            <%= f.label :email, class: "sr-only", for: "email-address" %>
+            <%= f.email_field :email, id: "email-address", autofocus: true,
+            autocomplete: "email", placeholder: "Email address", class: "appearance-none input input-bordered w-full" %>
+          </div>
+          <div>
+            <%= f.label :password, for: "password", class: "sr-only" %>
+            <%= f.password_field :password, id: "password", autocomplete:
+            "new-password", placeholder: "Password", class: "appearance-none input input-bordered w-full"
+            %>
+            <% if @minimum_password_length %>
+            <em class="text-sm text-base-content/60">(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "btn btn-primary btn-block" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="pt-1">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>

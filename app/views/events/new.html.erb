@@ -1,0 +1,98 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <h1 class="text-2xl mb-4">New Event</h1>
+
+    <%= turbo_frame_tag "event" do %>
+      <%= form_for @event, method: :post do |f| %>
+        <div class="space-y-6">
+          <div class="rounded-md shadow-sm -space-y-px flex flex-col gap-4">
+            <%= render(Forms::TextFieldComponent.new(
+              form: f,
+              name: :name,
+              placeholder: "Name",
+              errors: f.object.errors[:name],
+              value: f.object.name
+            )) %>
+
+            <div>
+              <%= f.label :event_type, class: "sr-only", for: "event_type" %>
+              <%= f.select :event_type, Event::EventTypes::ALL, { include_blank: "Event type" },
+              { class: "appearance-none select select-bordered w-full" } %>
+            </div>
+
+            <%= render(Forms::TextFieldComponent.new(
+              form: f,
+              name: :total_games,
+              placeholder: "Total Games",
+              value: f.object.total_games,
+              errors: f.object.errors[:total_games],
+              type: :number,
+              show_label: true
+            )) %>
+
+            <div>
+              <%= f.label "Event Start", class: "label label-text", for: "start_datetime" %>
+              <%= f.datetime_field :start_datetime, id: "start_datetime", autofocus: true,
+              placeholder: "Event Start", class: "appearance-none input input-bordered w-full" %>
+            </div>
+
+            <div>
+              <%= f.label "Event End", class: "label label-text", for: "end_datetime" %>
+              <%= f.datetime_field :end_datetime, id: "end_datetime", autofocus: true,
+              placeholder: "Event End", class: "appearance-none input input-bordered w-full" %>
+            </div>
+
+            <%= render(Forms::TextFieldComponent.new(
+              form: f,
+              name: :team_size,
+              placeholder: "Team Size",
+              errors: f.object.errors[:team_size],
+              value: f.object.team_size,
+              type: :number,
+              show_label: true
+            ))%>
+
+            <div class="flex gap-4">
+              <%= render(Forms::TextFieldComponent.new(
+                form: f,
+                name: :handicap_base,
+                placeholder: "Handicap Base",
+                value: f.object.handicap_base,
+                errors: f.object.errors[:handicap_base],
+                type: :number,
+                wrapper_class: 'w-1/2',
+                show_label: true
+              )) %>
+
+              <%= render(Forms::TextFieldComponent.new(
+                form: f,
+                name: :handicap_percent,
+                placeholder: "Handicap Percent",
+                value: f.object.handicap_percent,
+                errors: f.object.errors[:handicap_percent],
+                type: :number,
+                wrapper_class: 'w-1/2',
+                show_label: true
+              )) %>
+            </div>
+
+            <%= render(Forms::TextFieldComponent.new(
+              form: f,
+              name: :max_handicap_score,
+              placeholder: "Max Handicap Score",
+              value: f.object.max_handicap_score,
+              errors: f.object.errors[:max_handicap_score],
+              type: :number,
+              wrapper_class: 'w-1/2',
+              show_label: true
+            )) %>
+
+            <div class="actions">
+              <%= f.submit "Create Event", class: "btn btn-primary btn-block" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
